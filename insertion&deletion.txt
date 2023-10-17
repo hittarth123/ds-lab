@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int size = 10;
+    int arr[size] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int userIndex, choice;
+
+    cout << "Enter 1 for insertion, 2 for deletion: ";
+    cin >> choice;
+
+    if (choice == 1) {
+        cout << "Enter the index where you want to insert: ";
+        cin >> userIndex;
+
+        if (userIndex >= 0 && userIndex < size) {
+            // Insertion
+            int newValue;
+            cout << "Enter the value to insert: ";
+            cin >> newValue;
+
+            for (int i = size - 1; i > userIndex; --i) {
+                arr[i] = arr[i - 1];
+            }
+            arr[userIndex] = newValue;
+            cout << "Insertion successful." << endl;
+        } else {
+            cout << "Index out of bounds (Overflow)." << endl;
+        }
+    } else if (choice == 2) {
+        cout << "Enter the index you want to delete: ";
+        cin >> userIndex;
+
+        if (userIndex >= 0 && userIndex < size) {
+            // Deletion
+            for (int i = userIndex; i < size - 1; ++i) {
+                arr[i] = arr[i + 1];
+            }
+            arr[size - 1] = 0;
+            cout << "Deletion successful." << endl;
+        } else {
+            cout << "Index out of bounds (Underflow)." << endl;
+        }
+    } else {
+        cout << "Invalid choice." << endl;
+    }
+
+    // Display the updated array
+    cout << "Array after operation: ";
+    for (int i = 0; i < size; ++i) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
