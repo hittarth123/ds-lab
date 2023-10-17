@@ -1,0 +1,48 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+bool isPalindrome(Node* head) {
+    stack<int> s;
+    Node* temp = head;
+    while (temp != nullptr) {
+        s.push(temp->data);
+        temp = temp->next;
+    }
+
+    temp = head;
+    while (temp != nullptr) {
+        if (temp->data != s.top()) {
+            return false;
+        }
+        s.pop();
+        temp = temp->next;
+    }
+
+    return true;
+}
+
+int main() {
+    Node* head = new Node{1, nullptr};
+    head->next = new Node{2, nullptr};
+    head->next->next = new Node{3, nullptr};
+    head->next->next->next = new Node{2, nullptr};
+    head->next->next->next->next = new Node{1, nullptr};
+
+    bool palindrome = isPalindrome(head);
+    cout << (palindrome ? "Palindrome" : "Not Palindrome") << endl;
+
+   
+    while (head != nullptr) {
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+    }
+
+    return 0;
+}
